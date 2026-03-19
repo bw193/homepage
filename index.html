@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina Mirrors | OEM/ODM Manufacturing</title>
+    <title>BOLEN Art Mirror | Professional Mirror Manufacturer</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,8 @@
                     },
                     colors: {
                         primary: '#1a1a1a',
-                        accent: '#d4af37', // Gold
+                        accent: '#d4af37', // Gold for UI elements (Buttons, Icons)
+                        brand: '#f97316',  // Orange for BOLEN Logo ONLY
                         light: '#f9f9f9',
                     }
                 }
@@ -42,7 +43,7 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
         }
-        /* Custom Scrollbar */
+        /* Custom Scrollbar - Restored to Gray */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -50,11 +51,11 @@
             background: #f1f1f1;
         }
         ::-webkit-scrollbar-thumb {
-            background: #d4af37;
+            background: #c1c1c1; /* Neutral Gray */
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #b39020;
+            background: #a8a8a8;
         }
         .fade-in {
             animation: fadeIn 0.4s ease-out;
@@ -78,17 +79,6 @@
             display: block;
         }
         
-        /* AI Loading Animation */
-        .sparkle-loader {
-            display: inline-block;
-            animation: sparkle 1.5s infinite linear;
-        }
-        @keyframes sparkle {
-            0% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
-            100% { transform: scale(1) rotate(360deg); opacity: 1; }
-        }
-
         /* Chat Widget Styles */
         .chat-widget {
             position: fixed;
@@ -156,19 +146,18 @@
         .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
         @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
-        /* Customizer Preview */
-        #preview-mirror {
-            transition: all 0.5s ease;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        /* Product Gallery Thumbnails */
+        .thumbnail.active {
+            border-color: #d4af37; /* Back to Gold */
+            opacity: 1;
         }
-        .option-card {
-            cursor: pointer;
+        .thumbnail {
             border: 2px solid transparent;
+            opacity: 0.7;
             transition: all 0.2s;
         }
-        .option-card.selected {
-            border-color: #d4af37;
-            background-color: #fffbeb;
+        .thumbnail:hover {
+            opacity: 1;
         }
     </style>
 </head>
@@ -181,18 +170,16 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="navigateTo('home')">
                     <i class="fa-regular fa-gem text-accent text-2xl mr-2"></i>
-                    <span class="font-serif text-2xl font-bold tracking-wide">LUMINA</span>
-                    <span class="text-xs text-gray-400 ml-2 tracking-widest hidden sm:inline-block">MFG GROUP</span>
+                    <!-- Logo uses BRAND (Orange) only -->
+                    <span class="font-serif text-2xl font-bold tracking-wide text-brand">BOLEN</span>
+                    <span class="text-xs text-gray-400 ml-2 tracking-widest hidden sm:inline-block">ART MIRROR</span>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
                     <button onclick="navigateTo('home')" class="nav-link text-gray-600 hover:text-accent transition font-medium" data-i18n="nav_home">Home</button>
                     <button onclick="navigateTo('catalog')" class="nav-link text-gray-600 hover:text-accent transition font-medium" data-i18n="nav_catalog">Catalog</button>
-                    <button onclick="navigateTo('customizer')" class="nav-link text-gray-600 hover:text-accent transition font-medium" data-i18n="nav_customizer">Customizer</button>
-                    <button onclick="navigateTo('design-lab')" class="nav-link text-accent hover:text-yellow-600 transition font-bold flex items-center gap-1">
-                        <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> <span data-i18n="nav_design">Design Lab</span>
-                    </button>
+                    <button onclick="navigateTo('about')" class="nav-link text-gray-600 hover:text-accent transition font-medium" data-i18n="nav_about">About Factory</button>
                     <button onclick="navigateTo('contact')" class="nav-link text-gray-600 hover:text-accent transition font-medium" data-i18n="nav_contact">Contact</button>
                 </div>
 
@@ -228,8 +215,7 @@
             <div class="px-4 pt-2 pb-4 space-y-1">
                 <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-accent" data-i18n="nav_home">Home</button>
                 <button onclick="navigateTo('catalog'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-accent" data-i18n="nav_catalog">Catalog</button>
-                <button onclick="navigateTo('customizer'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-accent" data-i18n="nav_customizer">Customizer</button>
-                <button onclick="navigateTo('design-lab'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-accent font-bold hover:bg-gray-50" data-i18n="nav_design">Design Lab ✨</button>
+                <button onclick="navigateTo('about'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-accent" data-i18n="nav_about">About Factory</button>
                 <button onclick="navigateTo('contact'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-accent" data-i18n="nav_contact">Contact</button>
                 
                 <!-- Mobile Language Switch -->
@@ -253,18 +239,24 @@
             <!-- Hero Section -->
             <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop" alt="Modern Interior with Mirror" class="w-full h-full object-cover">
+                    <!-- Using uploaded image -->
+                    <img src="新厂房.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop';" 
+                         alt="BOLEN Factory Building" 
+                         class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/40"></div>
                 </div>
                 <div class="relative z-10 text-center text-white px-4 max-w-3xl">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight" data-i18n="hero_title">Reflecting Excellence</h1>
-                    <p class="text-lg md:text-xl mb-8 font-light opacity-90" data-i18n="hero_subtitle">Premier OEM/ODM partner for high-quality residential and commercial mirror solutions.</p>
+                    <!-- Hero Text in White with Shadow -->
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-2xl filter" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);" data-i18n="hero_title">Reflecting Excellence Since 2005</h1>
+                    
+                    <p class="text-lg md:text-2xl mb-8 font-light opacity-95 drop-shadow-lg text-white" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);" data-i18n="hero_subtitle">
+                        Your Global OEM/ODM Partner for Premium Residential & Commercial Mirror Solutions.
+                    </p>
+                    
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button onclick="navigateTo('customizer')" class="bg-white text-gray-900 px-8 py-4 font-serif font-semibold tracking-wide hover:bg-accent hover:text-white transition duration-300" data-i18n="btn_start_custom">
-                            Start Customizing
-                        </button>
-                        <button onclick="navigateTo('design-lab')" class="border border-accent bg-accent/20 backdrop-blur text-white px-8 py-4 font-serif font-semibold tracking-wide hover:bg-accent hover:text-white transition duration-300 flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> AI Design Lab
+                        <button onclick="navigateTo('catalog')" class="bg-white text-gray-900 px-8 py-4 font-serif font-semibold tracking-wide hover:bg-accent hover:text-white transition duration-300 shadow-xl" data-i18n="btn_view_catalog">
+                            View Catalog
                         </button>
                     </div>
                 </div>
@@ -274,23 +266,23 @@
             <section class="py-16 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2 class="text-3xl font-serif font-bold" data-i18n="why_choose_us">Why Choose Lumina MFG?</h2>
+                        <h2 class="text-3xl font-serif font-bold" data-i18n="why_choose_us">Why Choose BOLEN?</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         <div class="p-6 bg-white shadow-sm rounded-lg hover:shadow-md transition">
                             <i class="fa-solid fa-pencil-ruler text-accent text-4xl mb-4"></i>
                             <h3 class="text-xl font-bold mb-2" data-i18n="feat_odm_title">Custom Design (ODM)</h3>
-                            <p class="text-gray-500" data-i18n="feat_odm_desc">In-house R&D team ready to bring your sketches to production in 2 weeks.</p>
+                            <p class="text-gray-500" data-i18n="feat_odm_desc">Professional R&D team providing customized services.</p>
                         </div>
                         <div class="p-6 bg-white shadow-sm rounded-lg hover:shadow-md transition">
                             <i class="fa-solid fa-industry text-accent text-4xl mb-4"></i>
                             <h3 class="text-xl font-bold mb-2" data-i18n="feat_scale_title">Scalable Production</h3>
-                            <p class="text-gray-500" data-i18n="feat_scale_desc">Monthly capacity of 50,000 units with strict ISO 9001 quality control.</p>
+                            <p class="text-gray-500" data-i18n="feat_scale_desc">25,000 sqm factory with over 100,000 SKUs available.</p>
                         </div>
                         <div class="p-6 bg-white shadow-sm rounded-lg hover:shadow-md transition">
                             <i class="fa-solid fa-certificate text-accent text-4xl mb-4"></i>
-                            <h3 class="text-xl font-bold mb-2" data-i18n="feat_cert_title">Certified Quality</h3>
-                            <p class="text-gray-500" data-i18n="feat_cert_desc">CE, UL, and RoHS certified components for all LED and smart mirrors.</p>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="feat_cert_title">Global Certification</h3>
+                            <p class="text-gray-500" data-i18n="feat_cert_desc">CE, SAA, UL, CCC, IP44, IP66, RoHS certified.</p>
                         </div>
                     </div>
                 </div>
@@ -334,237 +326,194 @@
             </div>
         </div>
 
-        <!-- VIEW: CUSTOMIZER -->
-        <div id="view-customizer" class="page-view fade-in">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl font-serif font-bold mb-4" data-i18n="cust_title">Customizer Studio</h1>
-                    <p class="text-gray-500" data-i18n="cust_subtitle">Build your perfect mirror specifications for manufacturing.</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <!-- Controls Column -->
-                    <div class="lg:col-span-7 space-y-8">
-                        
-                        <!-- Dimensions -->
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <h3 class="font-bold text-lg mb-4" data-i18n="step_dims">1. Dimensions</h3>
-                            <div class="grid grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-sm text-gray-500 mb-1" data-i18n="lbl_width">Width (cm)</label>
-                                    <input type="range" id="cust-width" min="40" max="200" value="80" class="w-full accent-accent h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" oninput="updateCustomPreview()">
-                                    <div class="text-right font-bold mt-1"><span id="val-width">80</span>cm</div>
-                                </div>
-                                <div>
-                                    <label class="block text-sm text-gray-500 mb-1" data-i18n="lbl_height">Height (cm)</label>
-                                    <input type="range" id="cust-height" min="40" max="200" value="100" class="w-full accent-accent h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" oninput="updateCustomPreview()">
-                                    <div class="text-right font-bold mt-1"><span id="val-height">100</span>cm</div>
-                                </div>
+        <!-- VIEW: LOGIN -->
+        <div id="view-login" class="page-view fade-in">
+            <div class="min-h-[70vh] flex items-center justify-center bg-gray-50 py-12">
+                <div class="bg-white p-10 rounded-xl shadow-lg max-w-md w-full border border-gray-100 relative overflow-hidden">
+                    
+                    <!-- Decorative Background Elements -->
+                    <div class="absolute top-0 left-0 w-full h-2 bg-gray-900"></div>
+                    
+                    <!-- FORM: LOGIN -->
+                    <div id="auth-form-login" class="auth-section">
+                        <div class="text-center mb-8">
+                            <div class="inline-block p-3 bg-gray-50 rounded-full mb-4 border border-gray-100">
+                                <i class="fa-solid fa-id-card text-accent text-2xl"></i>
                             </div>
+                            <h1 class="text-2xl font-serif font-bold text-gray-900">Staff Portal</h1>
+                            <!-- UPDATED: Login Title to Orange BRAND color -->
+                            <p class="text-gray-500 text-sm">Secure access for <span class="text-brand font-bold">BOLEN</span> employees</p>
                         </div>
-
-                        <!-- Shape -->
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <h3 class="font-bold text-lg mb-4" data-i18n="step_shape">2. Shape</h3>
-                            <div class="grid grid-cols-4 gap-4">
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center selected" onclick="selectOption(this, 'shape', 'rect')" data-val="rect">
-                                    <div class="h-10 w-8 border-2 border-gray-400 mx-auto mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="shape_rect">Rectangle</span>
-                                </div>
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center" onclick="selectOption(this, 'shape', 'round')" data-val="round">
-                                    <div class="h-10 w-10 border-2 border-gray-400 rounded-full mx-auto mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="shape_round">Round</span>
-                                </div>
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center" onclick="selectOption(this, 'shape', 'capsule')" data-val="capsule">
-                                    <div class="h-10 w-6 border-2 border-gray-400 rounded-full mx-auto mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="shape_capsule">Capsule</span>
-                                </div>
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center" onclick="selectOption(this, 'shape', 'oval')" data-val="oval">
-                                    <div class="h-10 w-8 border-2 border-gray-400 rounded-[50%] mx-auto mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="shape_oval">Oval</span>
-                                </div>
+                        <form onsubmit="event.preventDefault(); handleLogin();">
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Employee ID</label>
+                                <input type="text" id="login-id" class="w-full p-3 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-accent transition" placeholder="e.g. admin">
                             </div>
-                        </div>
-
-                        <!-- Frame Material -->
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <h3 class="font-bold text-lg mb-4" data-i18n="step_frame">3. Frame Material</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center selected" onclick="selectOption(this, 'frame', 'none')" data-val="none">
-                                    <div class="h-8 w-full bg-gray-200 mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="frame_none">Frameless</span>
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide">Password</label>
+                                    <button type="button" onclick="switchAuth('forgot')" class="text-xs text-accent hover:underline">Forgot Password?</button>
                                 </div>
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center" onclick="selectOption(this, 'frame', 'aluminum')" data-val="aluminum">
-                                    <div class="h-8 w-full bg-gray-800 mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="frame_alum">Aluminum (Black)</span>
-                                </div>
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center" onclick="selectOption(this, 'frame', 'brass')" data-val="brass">
-                                    <div class="h-8 w-full bg-yellow-600 mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="frame_brass">Brushed Brass</span>
-                                </div>
-                                <div class="option-card p-4 rounded-lg border bg-gray-50 text-center" onclick="selectOption(this, 'frame', 'wood')" data-val="wood">
-                                    <div class="h-8 w-full bg-yellow-900 mb-2"></div>
-                                    <span class="text-xs font-bold" data-i18n="frame_wood">Solid Wood</span>
-                                </div>
+                                <input type="password" id="login-pass" class="w-full p-3 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-accent transition" placeholder="••••••••">
                             </div>
-                        </div>
-
-                        <!-- Functions -->
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <h3 class="font-bold text-lg mb-4" data-i18n="step_func">4. Smart Functions</h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                    <input type="checkbox" class="cust-func accent-accent h-5 w-5" value="Bluetooth Speaker">
-                                    <span class="ml-3 font-medium" data-i18n="func_bt">Bluetooth Audio</span>
-                                </label>
-                                <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                    <input type="checkbox" class="cust-func accent-accent h-5 w-5" value="Anti-fog System">
-                                    <span class="ml-3 font-medium" data-i18n="func_fog">Anti-fog / Defogger</span>
-                                </label>
-                                <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                    <input type="checkbox" class="cust-func accent-accent h-5 w-5" value="RGB Backlight">
-                                    <span class="ml-3 font-medium" data-i18n="func_rgb">RGB Backlight</span>
-                                </label>
-                                <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                    <input type="checkbox" class="cust-func accent-accent h-5 w-5" value="Time/Temp Display">
-                                    <span class="ml-3 font-medium" data-i18n="func_disp">Time/Temp Display</span>
-                                </label>
-                                <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                    <input type="checkbox" class="cust-func accent-accent h-5 w-5" value="Gesture Control">
-                                    <span class="ml-3 font-medium" data-i18n="func_gest">Gesture Control</span>
-                                </label>
+                            <button class="w-full bg-gray-900 text-white py-3 rounded font-bold hover:bg-accent transition shadow-lg mb-6">
+                                Access Dashboard
+                            </button>
+                            <div class="text-center border-t border-gray-100 pt-6">
+                                <p class="text-sm text-gray-500">New employee?</p>
+                                <button type="button" onclick="switchAuth('register')" class="text-gray-900 font-bold hover:text-accent transition text-sm mt-1">Create an Account</button>
                             </div>
-                        </div>
-
-                        <button onclick="addCustomConfigToCart()" class="w-full bg-gray-900 text-white py-4 rounded-xl font-bold text-lg hover:bg-accent transition shadow-lg" data-i18n="btn_add_config">
-                            Add Configuration to Inquiry
-                        </button>
-
+                        </form>
                     </div>
 
-                    <!-- Preview Column -->
-                    <div class="lg:col-span-5">
-                        <div class="sticky top-28">
-                            <div class="bg-gray-100 rounded-2xl p-8 h-[500px] flex items-center justify-center relative overflow-hidden">
-                                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
-                                
-                                <!-- Dynamic Preview Element -->
-                                <div id="preview-mirror" class="bg-white relative shadow-2xl flex items-center justify-center overflow-hidden">
-                                    <!-- Reflection placeholder -->
-                                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-50 to-white opacity-50"></div>
-                                    <div class="absolute top-0 left-0 w-full h-full bg-white/30 skew-x-12 transform -translate-x-full animate-shine"></div>
-                                    
-                                    <span class="text-gray-300 font-serif italic text-xl z-10 relative">Lumina</span>
+                    <!-- FORM: REGISTER -->
+                    <div id="auth-form-register" class="auth-section hidden">
+                        <div class="text-center mb-8">
+                            <h1 class="text-2xl font-serif font-bold text-gray-900">Create Account</h1>
+                            <p class="text-gray-500 text-sm">Register your employee credentials</p>
+                        </div>
+                        <form onsubmit="event.preventDefault(); handleRegister();">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">First Name</label>
+                                    <input type="text" id="reg-name" class="w-full p-3 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-accent transition" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Employee ID</label>
+                                    <input type="text" id="reg-id" class="w-full p-3 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-accent transition" required>
                                 </div>
                             </div>
-                            <div class="mt-6 bg-white p-6 rounded-xl border border-gray-100">
-                                <h4 class="font-bold text-gray-900 mb-2">Configuration Summary</h4>
-                                <ul class="text-sm text-gray-600 space-y-1" id="preview-summary">
-                                    <li>80cm x 100cm</li>
-                                    <li>Rectangle</li>
-                                    <li>Frameless</li>
-                                    <li>No Smart Functions</li>
-                                </ul>
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Work Email</label>
+                                <input type="email" id="reg-email" class="w-full p-3 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-accent transition" required>
                             </div>
-                        </div>
+                            <div class="mb-6">
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Password</label>
+                                <input type="password" id="reg-pass" class="w-full p-3 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-accent transition" required>
+                            </div>
+                            <button class="w-full bg-accent text-white py-3 rounded font-bold hover:bg-yellow-600 transition shadow-lg mb-6">
+                                Register Profile
+                            </button>
+                            <div class="text-center">
+                                <button type="button" onclick="switchAuth('login')" class="text-gray-500 hover:text-gray-900 text-sm">
+                                    <i class="fa-solid fa-arrow-left mr-1"></i> Back to Login
+                                </button>
+                            </div>
+                        </form>
                     </div>
+
+                    <!-- FORM: FORGOT PASSWORD -->
+                    <div id="auth-form-forgot" class="auth-section hidden">
+                        <div class="text-center mb-8">
+                            <div class="inline-block p-3 bg-red-50 rounded-full mb-4 border border-red-100">
+                                <i class="fa-solid fa-lock-open text-red-400 text-2xl"></i>
+                            </div>
+                            <h1 class="text-2xl font-serif font-bold text-gray-900">Recovery</h1>
+                            <p class="text-gray-500 text-sm">Enter email to reset password</p>
+                        </div>
+                        <form onsubmit="event.preventDefault(); handleForgot();">
+                            <div class="mb-6">
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Work Email</label>
+                                <input type="email" id="forgot-email" class="w-full p-3 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-accent transition" placeholder="name@bolenmirror.com" required>
+                            </div>
+                            <button class="w-full bg-gray-900 text-white py-3 rounded font-bold hover:bg-accent transition shadow-lg mb-6">
+                                Send Reset Link
+                            </button>
+                            <div class="text-center">
+                                <button type="button" onclick="switchAuth('login')" class="text-gray-500 hover:text-gray-900 text-sm">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- VIEW: AI DESIGN LAB -->
-        <div id="view-design-lab" class="page-view fade-in">
-            <div class="bg-gradient-to-r from-gray-900 to-gray-800 py-20 text-center text-white relative overflow-hidden">
-                <div class="absolute inset-0 opacity-10">
-                    <i class="fa-solid fa-wand-magic-sparkles absolute top-10 left-10 text-9xl"></i>
-                    <i class="fa-regular fa-lightbulb absolute bottom-10 right-10 text-9xl"></i>
-                </div>
-                <div class="relative z-10 max-w-4xl mx-auto px-4">
-                    <div class="inline-block bg-accent/20 backdrop-blur-sm border border-accent/50 rounded-full px-4 py-1 mb-4">
-                        <span class="text-accent font-bold text-sm tracking-wider"><i class="fa-solid fa-bolt"></i> POWERED BY GEMINI AI</span>
+        <!-- VIEW: DASHBOARD -->
+        <div id="view-dashboard" class="page-view fade-in">
+            <div class="bg-gray-900 text-white py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-serif font-bold">Seller Dashboard</h1>
+                        <p class="text-gray-400">Manage product inventory and specifications</p>
                     </div>
-                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6" data-i18n="design_title">AI Design Consultant</h1>
-                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto" data-i18n="design_subtitle">
-                        Two ways to innovate: Describe your vision textually, or upload a photo of your space for visual analysis.
-                    </p>
+                    <button onclick="handleLogout()" class="text-sm text-gray-400 hover:text-white border border-gray-700 px-4 py-2 rounded">Logout</button>
                 </div>
             </div>
-
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-10 relative z-20 space-y-12">
-                
-                <!-- TOOL 1: Text to Concept -->
-                <div class="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
-                    <div class="bg-gray-50 border-b border-gray-100 p-4 px-8 flex items-center gap-3">
-                        <i class="fa-solid fa-pen-nib text-accent"></i>
-                        <h3 class="font-bold text-gray-700" data-i18n="opt1_title">Option 1: Text to Specification</h3>
-                    </div>
-                    <div class="p-8 md:p-12">
-                        <label class="block text-gray-700 font-bold mb-4 text-lg" data-i18n="opt1_label">Describe your idea:</label>
-                        <div class="relative">
-                            <textarea id="ai-prompt" rows="3" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-gray-800 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition resize-none" placeholder="e.g., A large oval mirror for a luxury hotel lobby..."></textarea>
-                        </div>
-                        <div class="mt-4 flex justify-end">
-                            <button onclick="generateDesign()" id="btn-generate" class="bg-gray-900 text-white px-6 py-3 rounded-lg font-bold hover:bg-accent transition shadow-lg flex items-center gap-2">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="btn_generate">Generate Concept</span>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Output Section (Shared) -->
-                    <div id="ai-output-section" class="hidden border-t border-gray-100 bg-gray-50 p-8 md:p-12 transition-all">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="h-10 w-10 bg-gray-900 rounded-full flex items-center justify-center text-accent">
-                                <i class="fa-solid fa-robot"></i>
-                            </div>
-                            <h3 class="text-xl font-serif font-bold text-gray-900" data-i18n="ai_rec_title">AI Recommendation</h3>
-                        </div>
-                        <div id="ai-result-content" class="prose prose-sm max-w-none text-gray-600 bg-white p-6 rounded-lg border border-gray-200 shadow-sm mb-8"></div>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <button onclick="addCustomToCart()" class="flex-1 bg-gray-900 text-white px-6 py-4 rounded-lg font-bold hover:bg-gray-800 transition shadow">
-                                <i class="fa-solid fa-plus mr-2"></i> <span data-i18n="btn_add_custom">Add Concept to Inquiry List</span>
-                            </button>
-                            <button onclick="document.getElementById('ai-output-section').classList.add('hidden');" class="px-6 py-4 border border-gray-300 rounded-lg font-bold hover:bg-white transition text-gray-600" data-i18n="btn_close">
-                                Close
-                            </button>
-                        </div>
-                    </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <!-- Actions -->
+                <div class="mb-8 flex justify-end">
+                    <button onclick="toggleUploadForm()" class="bg-accent text-white px-6 py-3 rounded-lg font-bold hover:bg-yellow-600 transition shadow flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Add New Product
+                    </button>
                 </div>
 
-                <!-- TOOL 2: Image to Concept -->
-                <div class="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
-                    <div class="bg-gray-50 border-b border-gray-100 p-4 px-8 flex items-center gap-3">
-                        <i class="fa-solid fa-camera text-accent"></i>
-                        <h3 class="font-bold text-gray-700" data-i18n="opt2_title">Option 2: Room Visual Analyzer</h3>
-                    </div>
-                    <div class="p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <!-- Upload Form (Hidden by default) -->
+                <div id="upload-form" class="hidden bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-12">
+                    <h3 class="text-xl font-bold mb-6 border-b pb-4">Upload New Mirror</h3>
+                    <form onsubmit="event.preventDefault(); handleProductUpload();" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <h4 class="font-bold text-lg mb-2" data-i18n="upload_title">Upload a Room Photo</h4>
-                            <p class="text-gray-500 mb-6 text-sm" data-i18n="opt2_desc">Our AI will analyze the interior style, lighting conditions, and color palette of your room to recommend the perfect mirror specifications.</p>
-                            
-                            <div class="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:bg-gray-50 transition cursor-pointer" onclick="document.getElementById('room-upload').click()">
-                                <input type="file" id="room-upload" class="hidden" accept="image/*" onchange="handleImagePreview(this)">
-                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-300 mb-3"></i>
-                                <p class="text-sm font-bold text-gray-600" data-i18n="upload_text">Click to upload photo</p>
-                                <p class="text-xs text-gray-400" data-i18n="upload_sub">JPG, PNG up to 5MB</p>
-                            </div>
+                            <label class="block text-sm font-bold mb-2">Product Name</label>
+                            <input id="prod-name" type="text" class="w-full p-3 bg-gray-50 border rounded" required>
                         </div>
-                        <div class="flex flex-col items-center justify-center h-full min-h-[200px] bg-gray-100 rounded-lg overflow-hidden relative">
-                            <img id="image-preview" class="w-full h-full object-contain hidden" alt="Room Preview">
-                            <div id="image-placeholder" class="text-gray-400 text-sm" data-i18n="no_img">No image selected</div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Category</label>
+                            <select id="prod-cat" class="w-full p-3 bg-gray-50 border rounded">
+                                <option value="wall">Wall Mirror</option>
+                                <option value="floor">Floor Mirror</option>
+                                <option value="vanity">Vanity/Smart</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="px-8 pb-8 md:px-12 md:pb-12 flex justify-end">
-                        <button onclick="analyzeRoom()" id="btn-analyze" disabled class="bg-gray-300 text-white px-6 py-3 rounded-lg font-bold transition shadow-lg flex items-center gap-2 cursor-not-allowed">
-                            <i class="fa-solid fa-eye"></i> <span data-i18n="btn_analyze">Analyze Space</span>
-                        </button>
-                    </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Upload Images (Local)</label>
+                            <input id="prod-img-files" type="file" multiple accept="image/*" class="w-full p-2 bg-gray-50 border rounded" required>
+                            <p class="text-xs text-gray-500 mt-1">Select multiple files. First one will be main image.</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">MOQ (Units)</label>
+                            <input id="prod-moq" type="text" class="w-full p-3 bg-gray-50 border rounded" placeholder="e.g. 50 Units">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-bold mb-2">Description</label>
+                            <input id="prod-desc" type="text" class="w-full p-3 bg-gray-50 border rounded" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-bold mb-2">Technical Details</label>
+                            <textarea id="prod-details" rows="3" class="w-full p-3 bg-gray-50 border rounded"></textarea>
+                        </div>
+                        <div class="md:col-span-2 flex justify-end gap-4 mt-2">
+                            <button type="button" onclick="toggleUploadForm()" class="px-6 py-2 border rounded hover:bg-gray-50">Cancel</button>
+                            <button type="submit" class="px-6 py-2 bg-gray-900 text-white rounded hover:bg-accent font-bold">Upload Product</button>
+                        </div>
+                    </form>
                 </div>
 
+                <!-- Inventory List -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50 border-b border-gray-200">
+                            <tr>
+                                <th class="p-4 text-sm font-bold text-gray-600">Image</th>
+                                <th class="p-4 text-sm font-bold text-gray-600">Name</th>
+                                <th class="p-4 text-sm font-bold text-gray-600">Category</th>
+                                <th class="p-4 text-sm font-bold text-gray-600">ID</th>
+                                <th class="p-4 text-sm font-bold text-gray-600">Status</th>
+                                <th class="p-4 text-sm font-bold text-gray-600">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboard-table-body" class="divide-y divide-gray-100">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!-- VIEW: ABOUT -->
         <div id="view-about" class="page-view fade-in">
-            <!-- ... existing about code ... -->
             <div class="bg-gray-100 py-16 text-center">
                 <h1 class="text-4xl md:text-5xl font-serif font-bold" data-i18n="about_title">About Our Factory</h1>
             </div>
@@ -574,20 +523,21 @@
                         <img src="https://images.unsplash.com/photo-1565514020176-db792f3b7936?q=80&w=1000&auto=format&fit=crop" alt="Factory Floor" class="rounded-lg shadow-xl w-full">
                     </div>
                     <div>
-                        <h2 class="text-3xl font-serif font-bold mb-6" data-i18n="legacy_title">A Legacy of Reflection</h2>
+                        <h2 class="text-3xl font-serif font-bold mb-6" data-i18n="legacy_title">A Legacy of Quality Since 2005</h2>
                         <p class="text-gray-600 mb-4 leading-relaxed" data-i18n="legacy_text1">
-                            Founded in 2005, Lumina Mirrors Mfg Group has grown from a small glass workshop into a leading global supplier of premium mirrors. We specialize in working with hospitality brands, interior design firms, and retail chains to produce bespoke mirror solutions.
+                            Founded in 2005, Jiaxing Chengtai Mirror Co., Ltd. is a professional R&D and manufacturing enterprise for LED mirrors, bathroom mirrors, and full-length mirrors. We operate a 25,000 sqm self-built factory in Jiaxing, Zhejiang, just 60km from Shanghai Port.
                         </p>
                         <p class="text-gray-600 mb-6 leading-relaxed" data-i18n="legacy_text2">
-                            Our 50,000 sq. ft. facility combines traditional craftsmanship with modern CNC technology, ensuring every piece meets rigorous international standards.
+                            We own registered brands BOLEN (EU/US), Niccy, and Thiamo. As a National High-tech Enterprise, we hold 65+ patents and operate a municipal-level R&D center. Our products are certified by CE, SAA, UL, CCC, IP44/IP66, RoHS, and ISO9001.
                         </p>
                         <ul class="space-y-3">
-                            <li class="flex items-center text-gray-700"><i class="fa-solid fa-check text-accent mr-3"></i> <span data-i18n="cert_iso">ISO 9001:2015 Certified Facility</span></li>
-                            <li class="flex items-center text-gray-700"><i class="fa-solid fa-check text-accent mr-3"></i> <span data-i18n="cert_eco">5mm Copper-Free Silver Mirror (Eco-Friendly)</span></li>
-                            <li class="flex items-center text-gray-700"><i class="fa-solid fa-check text-accent mr-3"></i> <span data-i18n="cert_led">Custom LED Integration Specialists</span></li>
+                            <li class="flex items-center text-gray-700"><i class="fa-solid fa-check text-accent mr-3"></i> <span data-i18n="cert_iso">ISO 9001 Certified Facility</span></li>
+                            <li class="flex items-center text-gray-700"><i class="fa-solid fa-check text-accent mr-3"></i> <span data-i18n="cert_eco">120+ Export Countries</span></li>
+                            <li class="flex items-center text-gray-700"><i class="fa-solid fa-check text-accent mr-3"></i> <span data-i18n="cert_led">Trusted by IKEA & Walmart</span></li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="bg-gray-900 text-white rounded-2xl p-12 text-center">
                     <h2 class="text-3xl font-serif font-bold mb-8" data-i18n="process_title">Our Process</h2>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -618,7 +568,6 @@
 
         <!-- VIEW: CONTACT -->
         <div id="view-contact" class="page-view fade-in">
-            <!-- ... existing contact code ... -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                     <div>
@@ -626,6 +575,7 @@
                         <p class="text-gray-600 mb-8" data-i18n="contact_desc">
                             Ready to start your project? Fill out the form below or contact our sales team directly. We typically respond within 24 hours.
                         </p>
+                        
                         <div class="space-y-6">
                             <div class="flex items-start">
                                 <div class="bg-gray-100 p-4 rounded-full mr-4">
@@ -633,7 +583,7 @@
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900" data-i18n="addr_title">Factory Address</h3>
-                                    <p class="text-gray-500">123 Industrial Ave, Building 4<br>Manufacturing District, NY 10001</p>
+                                    <p class="text-gray-500">No. 123, Industrial Zone, Jiaxing City<br>Zhejiang Province, China</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
@@ -642,8 +592,8 @@
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900" data-i18n="email_title">Email Us</h3>
-                                    <p class="text-gray-500">sales@luminamirrors.com</p>
-                                    <p class="text-gray-500">support@luminamirrors.com</p>
+                                    <p class="text-gray-500">sales@bolenmirror.com</p>
+                                    <p class="text-gray-500">support@bolenmirror.com</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
@@ -652,12 +602,13 @@
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900" data-i18n="call_title">Call Us</h3>
-                                    <p class="text-gray-500">+1 (555) 123-4567</p>
-                                    <p class="text-xs text-gray-400">Mon-Fri, 9am - 6pm EST</p>
+                                    <p class="text-gray-500">+86 573 8888 8888</p>
+                                    <p class="text-xs text-gray-400">Mon-Fri, 9am - 6pm CST</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="bg-white p-8 shadow-lg rounded-xl border border-gray-100">
                         <h3 class="text-2xl font-bold mb-6" data-i18n="form_title">Send an Inquiry</h3>
                         <form onsubmit="event.preventDefault(); showToast('Message sent!');" class="space-y-4">
@@ -709,19 +660,18 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-100 pt-12 pb-8 mt-auto">
-        <!-- ... existing footer ... -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="col-span-1 md:col-span-1">
-                    <span class="font-serif text-2xl font-bold tracking-wide text-gray-900">LUMINA</span>
-                    <p class="text-gray-500 mt-4 text-sm" data-i18n="footer_desc">Premier OEM/ODM mirror manufacturer for global brands.</p>
+                    <!-- UPDATED: Footer Logo to Orange BRAND color -->
+                    <span class="font-serif text-2xl font-bold tracking-wide text-brand">BOLEN</span>
+                    <p class="text-gray-500 mt-4 text-sm" data-i18n="footer_desc">Trusted by IKEA, Walmart & Hilton since 2005.</p>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4" data-i18n="footer_nav">Navigate</h4>
                     <ul class="space-y-2 text-sm text-gray-600">
                         <li><button onclick="navigateTo('home')" class="hover:text-accent" data-i18n="nav_home">Home</button></li>
                         <li><button onclick="navigateTo('catalog')" class="hover:text-accent" data-i18n="nav_catalog">Catalog</button></li>
-                        <li><button onclick="navigateTo('customizer')" class="hover:text-accent" data-i18n="nav_customizer">Customizer</button></li>
                         <li><button onclick="navigateTo('about')" class="hover:text-accent" data-i18n="nav_about">About Us</button></li>
                         <li><button onclick="navigateTo('contact')" class="hover:text-accent" data-i18n="nav_contact">Contact</button></li>
                     </ul>
@@ -735,14 +685,18 @@
                 </div>
                 <div>
                     <h4 class="font-bold mb-4" data-i18n="footer_connect">Connect</h4>
-                    <div class="flex space-x-4">
+                    <div class="flex space-x-4 mb-4">
                         <a href="#" class="text-gray-400 hover:text-accent text-xl"><i class="fa-brands fa-linkedin"></i></a>
                         <a href="#" class="text-gray-400 hover:text-accent text-xl"><i class="fa-brands fa-instagram"></i></a>
                     </div>
+                    <!-- Added Staff Link -->
+                    <button onclick="navigateTo('login')" class="text-xs text-gray-400 border border-gray-200 px-2 py-1 rounded hover:text-gray-900 hover:border-gray-900 transition">
+                        <i class="fa-solid fa-lock mr-1"></i> Staff Portal
+                    </button>
                 </div>
             </div>
             <div class="border-t border-gray-100 pt-8 text-center text-gray-400 text-xs">
-                &copy; 2023 Lumina Mirrors Mfg Group. All rights reserved.
+                &copy; 2023 Jiaxing Chengtai Mirror Co., Ltd. All rights reserved.
             </div>
         </div>
     </footer>
@@ -796,7 +750,8 @@
                         <div class="absolute bottom-0 right-0 h-2.5 w-2.5 bg-green-500 rounded-full border-2 border-gray-900"></div>
                     </div>
                     <div>
-                        <h4 class="font-bold text-sm">Lumina Assistant</h4>
+                        <!-- UPDATED: Chat Widget Title to Orange BRAND color -->
+                        <h4 class="font-bold text-sm"><span class="text-brand">BOLEN</span> Assistant</h4>
                         <p class="text-xs text-gray-400">Online | Powered by Gemini</p>
                     </div>
                 </div>
@@ -806,7 +761,7 @@
             <!-- Messages -->
             <div id="chat-messages" class="chat-messages">
                 <div class="message bot">
-                    Hello! I'm your factory assistant. Ask me about our products, MOQs, or custom manufacturing capabilities.
+                    Hello! I'm your factory assistant. Ask me about our 100,000+ SKUs, certifications, or OEM capabilities.
                 </div>
             </div>
             
@@ -832,27 +787,40 @@
         // API Configuration
         const apiKey = ""; // Set by environment
 
+        // Global State
+        let cart = [];
+        let currentLang = 'en';
+        const langMap = {
+            en: "English",
+            zh: "Chinese (Simplified)",
+            fr: "French"
+        };
+
+        // Auth State (In-memory database for demo)
+        let staffUsers = [
+            { id: 'admin', pass: 'admin', name: 'Administrator', email: 'admin@bolen.com' }
+        ];
+
         // Translation Dictionary
         const translations = {
             en: {
                 nav_home: "Home",
                 nav_catalog: "Catalog",
                 nav_customizer: "Customizer",
-                nav_design: "Design Lab ✨",
                 nav_about: "About Factory",
                 nav_contact: "Contact",
-                hero_title: "Reflecting Excellence",
-                hero_subtitle: "Premier OEM/ODM partner for high-quality residential and commercial mirror solutions.",
+                hero_title: "Reflecting Excellence Since 2005",
+                hero_subtitle: "Your Global OEM/ODM Partner for Premium Residential & Commercial Mirror Solutions.",
                 btn_view_catalog: "View Catalog",
                 btn_get_quote: "Get a Quote",
                 btn_start_custom: "Start Customizing",
-                why_choose_us: "Why Choose Lumina MFG?",
+                why_choose_us: "Why Choose BOLEN?",
                 feat_odm_title: "Custom Design (ODM)",
-                feat_odm_desc: "In-house R&D team ready to bring your sketches to production in 2 weeks.",
+                feat_odm_desc: "Professional R&D team providing customized services.",
                 feat_scale_title: "Scalable Production",
-                feat_scale_desc: "Monthly capacity of 50,000 units with strict ISO 9001 quality control.",
-                feat_cert_title: "Certified Quality",
-                feat_cert_desc: "CE, UL, and RoHS certified components for all LED and smart mirrors.",
+                feat_scale_desc: "25,000 sqm factory with over 100,000 SKUs available.",
+                feat_cert_title: "Global Certification",
+                feat_cert_desc: "CE, SAA, UL, CCC, IP44, IP66, RoHS certified.",
                 feat_models_title: "Featured Models",
                 feat_models_subtitle: "Best-selling designs available for immediate white-labeling.",
                 link_view_all: "View All Products",
@@ -863,12 +831,12 @@
                 cat_floor: "Floor",
                 cat_vanity: "Vanity / Smart",
                 about_title: "About Our Factory",
-                legacy_title: "A Legacy of Reflection",
-                legacy_text1: "Founded in 2005, Lumina Mirrors Mfg Group has grown from a small glass workshop into a leading global supplier of premium mirrors. We specialize in working with hospitality brands, interior design firms, and retail chains to produce bespoke mirror solutions.",
-                legacy_text2: "Our 50,000 sq. ft. facility combines traditional craftsmanship with modern CNC technology, ensuring every piece meets rigorous international standards.",
-                cert_iso: "ISO 9001:2015 Certified Facility",
-                cert_eco: "5mm Copper-Free Silver Mirror (Eco-Friendly)",
-                cert_led: "Custom LED Integration Specialists",
+                legacy_title: "A Legacy of Quality Since 2005",
+                legacy_text1: "Founded in 2005, Jiaxing Chengtai Mirror Co., Ltd. is a professional R&D and manufacturing enterprise for LED mirrors, bathroom mirrors, and full-length mirrors. We operate a 25,000 sqm self-built factory in Jiaxing, Zhejiang, just 60km from Shanghai Port.",
+                legacy_text2: "We own registered brands BOLEN (EU/US), Niccy, and Thiamo. As a National High-tech Enterprise, we hold 65+ patents and operate a municipal-level R&D center. Our products are certified by CE, SAA, UL, CCC, IP44/IP66, RoHS, and ISO9001.",
+                cert_iso: "ISO 9001 Certified Facility",
+                cert_eco: "120+ Export Countries",
+                cert_led: "Trusted by IKEA & Walmart",
                 process_title: "Our Process",
                 proc_1_title: "Consultation",
                 proc_1_desc: "Design review & material selection.",
@@ -891,7 +859,7 @@
                 lbl_msg: "Message",
                 btn_send_msg: "Send Message",
                 back_catalog: "Back to Catalog",
-                footer_desc: "Premier OEM/ODM mirror manufacturer for global brands.",
+                footer_desc: "Trusted by IKEA, Walmart & Hilton since 2005.",
                 footer_nav: "Navigate",
                 footer_legal: "Legal",
                 footer_connect: "Connect",
@@ -909,65 +877,47 @@
                 shape_rect: "Rectangle",
                 shape_round: "Round",
                 shape_capsule: "Capsule",
-                shape_oval: "Oval",
-                step_frame: "3. Frame Material",
-                frame_none: "Frameless",
-                frame_alum: "Aluminum (Black)",
-                frame_brass: "Brushed Brass",
-                frame_wood: "Solid Wood",
-                step_func: "4. Smart Functions",
-                func_bt: "Bluetooth Audio",
-                func_fog: "Anti-fog / Defogger",
-                func_rgb: "RGB Backlight",
-                func_disp: "Time/Temp Display",
-                func_gest: "Gesture Control",
-                btn_add_config: "Add Configuration to Inquiry",
-                // AI Design Lab
-                design_title: "AI Design Consultant",
-                design_subtitle: "Two ways to innovate: Describe your vision textually, or upload a photo of your space for visual analysis.",
-                opt1_title: "Option 1: Text to Specification",
-                opt1_label: "Describe your idea:",
-                btn_generate: "Generate Concept",
-                opt2_title: "Option 2: Room Visual Analyzer",
-                opt2_desc: "Our AI will analyze the interior style, lighting conditions, and color palette of your room to recommend the perfect mirror specifications.",
-                upload_title: "Upload a Room Photo",
-                upload_text: "Click to upload photo",
-                upload_sub: "JPG, PNG up to 5MB",
-                btn_analyze: "Analyze Space",
-                ai_rec_title: "AI Recommendation",
-                btn_add_custom: "Add Concept to Inquiry List",
-                btn_close: "Close",
-                no_img: "No image selected",
-                prompt_ph: "e.g., A large oval mirror for a luxury hotel lobby...",
-                // Dynamic JS Labels
-                lbl_view_details: "View Details",
-                lbl_model_id: "Model ID",
+                shape_oval: "Ovale",
+                step_frame: "3. Matériau du Cadre",
+                frame_none: "Sans Cadre",
+                frame_alum: "Aluminium (Noir)",
+                frame_brass: "Laiton Brossé",
+                frame_wood: "Bois Massif",
+                step_func: "4. Fonctions Intelligentes",
+                func_bt: "Audio Bluetooth",
+                func_fog: "Système Anti-buée",
+                func_rgb: "Rétroéclairage RGB",
+                func_disp: "Affichage Heure/Temp",
+                func_gest: "Contrôle Gestuel",
+                btn_add_config: "Ajouter la Configuration à la Demande",
+                // Dynamic
+                lbl_view_details: "Voir Détails",
+                lbl_model_id: "ID Modèle",
                 lbl_dims: "Dimensions",
-                lbl_moq: "Min. Order Qty",
-                lbl_mat_feat: "Material & Features:",
-                btn_add_list: "Add to Inquiry List",
-                btn_ask_q: "Ask Question",
+                lbl_moq: "Qté Min. Commande",
+                lbl_mat_feat: "Matériaux & Caractéristiques :",
+                btn_add_list: "Ajouter à la Liste",
+                btn_ask_q: "Poser une Question",
                 toast_added: "Added to list"
             },
             zh: {
                 nav_home: "首页",
                 nav_catalog: "产品目录",
                 nav_customizer: "定制工作室",
-                nav_design: "AI 设计室 ✨",
                 nav_about: "工厂简介",
                 nav_contact: "联系我们",
-                hero_title: "映照卓越品质",
-                hero_subtitle: "高端住宅和商业镜子解决方案的首选 OEM/ODM 合作伙伴。",
+                hero_title: "映照卓越品质 - 始于2005",
+                hero_subtitle: "您的高端住宅与商业镜子解决方案全球 OEM/ODM 合作伙伴。",
                 btn_view_catalog: "查看目录",
                 btn_get_quote: "获取报价",
                 btn_start_custom: "开始定制",
-                why_choose_us: "为什么选择 Lumina?",
+                why_choose_us: "为什么选择 BOLEN?",
                 feat_odm_title: "定制设计 (ODM)",
-                feat_odm_desc: "内部研发团队，2周内将您的设计草图转化为产品。",
+                feat_odm_desc: "专业的研发团队，提供定制服务。",
                 feat_scale_title: "规模化生产",
-                feat_scale_desc: "月产能50,000台，严格执行ISO 9001质量控制。",
-                feat_cert_title: "认证质量",
-                feat_cert_desc: "所有LED和智能镜子均采用CE, UL, RoHS认证组件。",
+                feat_scale_desc: "25,000平方米厂房，10万+ SKU产品选项。",
+                feat_cert_title: "全球认证",
+                feat_cert_desc: "通过CE, SAA, UL, CCC, IP44, IP66, RoHS等安全与环保认证。",
                 feat_models_title: "精选型号",
                 feat_models_subtitle: "最畅销设计，可直接贴牌生产。",
                 link_view_all: "查看所有产品",
@@ -979,11 +929,11 @@
                 cat_vanity: "浴室/智能镜",
                 about_title: "关于我们工厂",
                 legacy_title: "品质传承",
-                legacy_text1: "Lumina Mirrors Mfg Group 成立于2005年，从一家小型玻璃作坊发展成为全球领先的高端镜子供应商。我们专注于与酒店品牌、室内设计公司和零售连锁店合作，生产定制镜子解决方案。",
-                legacy_text2: "我们拥有50,000平方英尺的工厂，结合传统工艺与现代CNC技术，确保每件产品符合严格的国际标准。",
-                cert_iso: "ISO 9001:2015 认证工厂",
-                cert_eco: "5mm 无铜银镜 (环保)",
-                cert_led: "定制LED集成专家",
+                legacy_text1: "嘉兴市成泰镜业有限公司创建于2005年，是一家LED灯镜，浴室镜和全身镜的专业的镜子产品研发及生产企业，有25000平方米的自建厂房，位于浙江省嘉兴市，距离上海港仅60公里。",
+                legacy_text2: "成泰镜业拥有在欧洲、美国注册品牌：BOLEN，在美国注册品牌：Niccy, Thiamo。截止目前在中国拥有65项发明专利、实用新型专利；拥有市级研发中心与实验室，被认证为中国国家级高新技术企业，产品通过CE，SAA，UL，CCC,IP44，IP66，RoHS等安全与环保认证，也通过ISO9001等质量体系认证。",
+                cert_iso: "ISO 9001 质量体系认证",
+                cert_eco: "出口120多个国家和地区",
+                cert_led: "宜家、沃尔玛、希尔顿信赖伙伴",
                 process_title: "生产流程",
                 proc_1_title: "咨询",
                 proc_1_desc: "设计评审与材料选择。",
@@ -1006,7 +956,7 @@
                 lbl_msg: "留言内容",
                 btn_send_msg: "发送留言",
                 back_catalog: "返回目录",
-                footer_desc: "全球品牌的首选 OEM/ODM 镜子制造商。",
+                footer_desc: "自2005年以来，宜家、沃尔玛和希尔顿的信赖合作伙伴。",
                 footer_nav: "导航",
                 footer_legal: "法律条款",
                 footer_connect: "关注我们",
@@ -1037,23 +987,6 @@
                 func_disp: "时间/温度显示",
                 func_gest: "手势控制",
                 btn_add_config: "添加到询价单",
-                // AI Design Lab
-                design_title: "AI 设计顾问",
-                design_subtitle: "两种创新方式：文字描述您的愿景，或上传空间照片进行视觉分析。",
-                opt1_title: "选项 1：文字转规格",
-                opt1_label: "描述您的想法：",
-                btn_generate: "生成方案",
-                opt2_title: "选项 2：空间视觉分析",
-                opt2_desc: "我们的 AI 将分析您房间的室内风格、光照条件和配色方案，以推荐完美的镜子规格。",
-                upload_title: "上传房间照片",
-                upload_text: "点击上传照片",
-                upload_sub: "JPG, PNG 最大 5MB",
-                btn_analyze: "分析空间",
-                ai_rec_title: "AI 推荐",
-                btn_add_custom: "添加到询价单",
-                btn_close: "关闭",
-                no_img: "未选择图片",
-                prompt_ph: "例如：豪华酒店大堂的大型椭圆形镜子...",
                 // Dynamic
                 lbl_view_details: "查看详情",
                 lbl_model_id: "型号 ID",
@@ -1068,21 +1001,20 @@
                 nav_home: "Accueil",
                 nav_catalog: "Catalogue",
                 nav_customizer: "Personnaliser",
-                nav_design: "Labo Design ✨",
                 nav_about: "L'Usine",
                 nav_contact: "Contact",
-                hero_title: "Le Reflet de l'Excellence",
-                hero_subtitle: "Partenaire OEM/ODM de premier plan pour des solutions de miroirs résidentiels et commerciaux de haute qualité.",
+                hero_title: "Le Reflet de l'Excellence Depuis 2005",
+                hero_subtitle: "Votre Partenaire Mondial OEM/ODM pour des Solutions de Miroirs Résidentiels et Commerciaux Haut de Gamme.",
                 btn_view_catalog: "Voir le Catalogue",
                 btn_get_quote: "Obtenir un Devis",
                 btn_start_custom: "Commencer à Personnaliser",
-                why_choose_us: "Pourquoi Choisir Lumina ?",
+                why_choose_us: "Pourquoi Choisir BOLEN ?",
                 feat_odm_title: "Design Personnalisé (ODM)",
-                feat_odm_desc: "Équipe R&D interne prête à transformer vos croquis en production en 2 semaines.",
+                feat_odm_desc: "Équipe R&D professionnelle offrant des services sur mesure.",
                 feat_scale_title: "Production Évolutive",
-                feat_scale_desc: "Capacité mensuelle de 50 000 unités avec un contrôle qualité strict ISO 9001.",
-                feat_cert_title: "Qualité Certifiée",
-                feat_cert_desc: "Composants certifiés CE, UL et RoHS pour tous les miroirs LED et intelligents.",
+                feat_scale_desc: "Usine de 25 000 m² avec plus de 100 000 SKU disponibles.",
+                feat_cert_title: "Certification Mondiale",
+                feat_cert_desc: "Certifié CE, SAA, UL, CCC, IP44, IP66, RoHS.",
                 feat_models_title: "Modèles en Vedette",
                 feat_models_subtitle: "Designs les plus vendus disponibles pour un étiquetage privé immédiat.",
                 link_view_all: "Voir Tous les Produits",
@@ -1093,12 +1025,12 @@
                 cat_floor: "Sur Pied",
                 cat_vanity: "Salle de Bain / Smart",
                 about_title: "À Propos de Notre Usine",
-                legacy_title: "Un Héritage de Réflexion",
-                legacy_text1: "Fondé en 2005, Lumina Mirrors Mfg Group est passé d'un petit atelier de verre à un fournisseur mondial de miroirs haut de gamme. Nous sommes spécialisés dans la collaboration avec des marques hôtelières et des chaînes de vente au détail.",
-                legacy_text2: "Notre installation de 50 000 pieds carrés combine l'artisanat traditionnel avec la technologie CNC moderne, garantissant que chaque pièce répond aux normes internationales rigoureuses.",
-                cert_iso: "Installation Certifiée ISO 9001:2015",
-                cert_eco: "Miroir Argent Sans Cuivre 5mm (Écologique)",
-                cert_led: "Spécialistes de l'Intégration LED",
+                legacy_title: "Un Héritage de Qualité Depuis 2005",
+                legacy_text1: "Fondée en 2005, Jiaxing Chengtai Mirror Co., Ltd. est une entreprise professionnelle de R&D et de fabrication de miroirs LED, de salle de bain et de miroirs sur pied. Nous exploitons une usine de 25 000 m² à Jiaxing, Zhejiang, à seulement 60 km du port de Shanghai.",
+                legacy_text2: "Nous possédons les marques déposées BOLEN (UE/US), Niccy et Thiamo. En tant qu'entreprise nationale de haute technologie, nous détenons plus de 65 brevets et exploitons un centre de R&D municipal. Nos produits sont certifiés CE, SAA, UL, CCC, IP44/IP66, RoHS et ISO9001.",
+                cert_iso: "Installation Certifiée ISO 9001",
+                cert_eco: "Exportation vers 120+ Pays",
+                cert_led: "Approuvé par IKEA, Walmart & Hilton",
                 process_title: "Notre Processus",
                 proc_1_title: "Consultation",
                 proc_1_desc: "Revue de conception et sélection des matériaux.",
@@ -1121,7 +1053,7 @@
                 lbl_msg: "Message",
                 btn_send_msg: "Envoyer le Message",
                 back_catalog: "Retour au Catalogue",
-                footer_desc: "Fabricant de miroirs OEM/ODM de premier plan pour les marques mondiales.",
+                footer_desc: "Partenaire de confiance d'IKEA, Walmart et Hilton depuis 2005.",
                 footer_nav: "Naviguer",
                 footer_legal: "Légal",
                 footer_connect: "Connecter",
@@ -1152,23 +1084,6 @@
                 func_disp: "Affichage Heure/Temp",
                 func_gest: "Contrôle Gestuel",
                 btn_add_config: "Ajouter la Configuration à la Demande",
-                // AI Design Lab
-                design_title: "Consultant en Design IA",
-                design_subtitle: "Deux façons d'innover : Décrivez votre vision textuellement, ou téléchargez une photo de votre espace pour une analyse visuelle.",
-                opt1_title: "Option 1 : Texte vers Spécification",
-                opt1_label: "Décrivez votre idée :",
-                btn_generate: "Générer le Concept",
-                opt2_title: "Option 2 : Analyseur Visuel de Pièce",
-                opt2_desc: "Notre IA analysera le style intérieur, l'éclairage et la palette de couleurs de votre pièce pour recommander les spécifications de miroir parfaites.",
-                upload_title: "Télécharger une Photo de Pièce",
-                upload_text: "Cliquez pour télécharger",
-                upload_sub: "JPG, PNG jusqu'à 5 Mo",
-                btn_analyze: "Analyser l'Espace",
-                ai_rec_title: "Recommandation IA",
-                btn_add_custom: "Ajouter à la Liste",
-                btn_close: "Fermer",
-                no_img: "Aucune image sélectionnée",
-                prompt_ph: "ex., Un grand miroir ovale pour un hall d'hôtel de luxe...",
                 // Dynamic
                 lbl_view_details: "Voir Détails",
                 lbl_model_id: "ID Modèle",
@@ -1179,26 +1094,6 @@
                 btn_ask_q: "Poser une Question",
                 toast_added: "Ajouté à la liste"
             }
-        };
-
-        // Current Language State
-        let currentLang = 'en';
-        const langMap = {
-            en: "English",
-            zh: "Chinese (Simplified)",
-            fr: "French"
-        };
-
-        // Custom AI Data
-        let currentGeneratedDesign = null;
-
-        // Customizer State
-        let customConfig = {
-            width: 80,
-            height: 100,
-            shape: 'rect',
-            frame: 'none',
-            functions: []
         };
 
         function changeLanguage(lang) {
@@ -1212,10 +1107,6 @@
                     el.innerText = translations[lang][key];
                 }
             });
-
-            // 2. Update Placeholders
-            const promptArea = document.getElementById('ai-prompt');
-            if (promptArea) promptArea.placeholder = translations[lang]['prompt_ph'] || "Describe your idea...";
 
             // 3. Re-render Products to update dynamic labels and categories
             const activeCategoryBtn = document.querySelector('.filter-btn.bg-gray-900');
@@ -1239,14 +1130,19 @@
         }
 
         // ... Product Data and Init ...
-        // (Product Data same as before)
         // Data
-        const products = [
+        // UPDATED: Added 'images' array to support gallery view
+        let products = [
             {
                 id: 101,
                 name: "The Halo",
                 category: "wall",
                 image: "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Minimalist round frameless mirror with ambient LED backing.",
                 details: "5mm copper-free silver mirror. IP44 rated LED strip (3000K-6000K). Touch sensor dimmer.",
                 dimensions: "60cm / 80cm / 100cm Diameter",
@@ -1257,6 +1153,10 @@
                 name: "Gilded Arch",
                 category: "floor",
                 image: "https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Full-length floor mirror with an antique gold leaf finish.",
                 details: "Solid wood frame with hand-applied gold leaf finish. Shatter-proof backing.",
                 dimensions: "180cm x 80cm",
@@ -1267,6 +1167,10 @@
                 name: "Modern Octagon",
                 category: "wall",
                 image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Geometric brass-framed mirror perfect for entryways.",
                 details: "Brushed brass metal frame. Deep-set design creates a shadow box effect.",
                 dimensions: "70cm x 70cm",
@@ -1277,6 +1181,9 @@
                 name: "Noir Vanity",
                 category: "vanity",
                 image: "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Matte black bathroom mirror with anti-fog coating.",
                 details: "Aluminum alloy frame (Matte Black). Built-in defogger pad. Hardwired.",
                 dimensions: "60cm x 90cm",
@@ -1287,6 +1194,9 @@
                 name: "The leaning Tower",
                 category: "floor",
                 image: "https://images.unsplash.com/photo-1594912765369-24b96618f119?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1594912765369-24b96618f119?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Oversized rustic wood frame leaning mirror.",
                 details: "Reclaimed pine wood frame with natural stain. Heavy-duty construction.",
                 dimensions: "200cm x 100cm",
@@ -1297,6 +1207,9 @@
                 name: "Sunburst Art",
                 category: "wall",
                 image: "https://images.unsplash.com/photo-1612152668444-c192723a7854?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1612152668444-c192723a7854?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Decorative accent mirror with gold spike design.",
                 details: "Iron frame with electroplated gold finish. Central beveled mirror.",
                 dimensions: "90cm Diameter",
@@ -1307,6 +1220,9 @@
                 name: "Capsule Lite",
                 category: "vanity",
                 image: "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Pill-shaped bathroom mirror with front-facing light.",
                 details: "Frosted edge LED lighting. Bluetooth speaker option available.",
                 dimensions: "50cm x 100cm",
@@ -1317,6 +1233,9 @@
                 name: "Industrial Grid",
                 category: "wall",
                 image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=800&auto=format&fit=crop",
+                images: [
+                    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=800&auto=format&fit=crop"
+                ],
                 description: "Window-pane style mirror with black metal muntins.",
                 details: "Powder-coated steel grid. Perfect for loft style interiors.",
                 dimensions: "120cm x 80cm",
@@ -1324,14 +1243,12 @@
             }
         ];
 
-        let cart = [];
-
         // Initialization
         function init() {
             renderCatalog(products);
             renderHomePreview(products.slice(0, 3));
             updateCartUI();
-            updateCustomPreview(); // Init customizer
+            // updateCustomPreview(); // Removed Customizer init
         }
 
         // Navigation / Routing System
@@ -1351,218 +1268,175 @@
             window.scrollTo(0, 0);
         }
 
-        // --- CUSTOMIZER LOGIC ---
-        function selectOption(element, type, value) {
-            // Remove selected class from siblings
-            const parent = element.parentElement;
-            Array.from(parent.children).forEach(child => child.classList.remove('selected'));
-            
-            // Add selected class
-            element.classList.add('selected');
-            
-            // Update State
-            customConfig[type] = value;
-            
-            updateCustomPreview();
-        }
-
-        function updateCustomPreview() {
-            // Get dimensions
-            const wInput = document.getElementById('cust-width');
-            const hInput = document.getElementById('cust-height');
-            customConfig.width = wInput.value;
-            customConfig.height = hInput.value;
-            
-            // Update text displays
-            document.getElementById('val-width').innerText = customConfig.width;
-            document.getElementById('val-height').innerText = customConfig.height;
-
-            // Get functions
-            customConfig.functions = [];
-            document.querySelectorAll('.cust-func:checked').forEach(cb => {
-                customConfig.functions.push(cb.value);
-            });
-
-            // Update Visual Preview
-            const preview = document.getElementById('preview-mirror');
-            
-            // 1. Aspect Ratio (Max width/height constraints for display)
-            const maxWidth = 250; 
-            const scale = Math.min(maxWidth / customConfig.width, 350 / customConfig.height);
-            
-            preview.style.width = (customConfig.width * 2) + 'px'; // Multiplier for visual impact
-            preview.style.height = (customConfig.height * 2) + 'px';
-
-            // 2. Shape
-            preview.style.borderRadius = '0';
-            if (customConfig.shape === 'round') preview.style.borderRadius = '50%';
-            if (customConfig.shape === 'capsule') preview.style.borderRadius = '9999px';
-            if (customConfig.shape === 'oval') preview.style.borderRadius = '50%';
-
-            // 3. Frame
-            preview.style.border = 'none';
-            if (customConfig.frame === 'aluminum') preview.style.border = '8px solid #1a1a1a';
-            if (customConfig.frame === 'brass') preview.style.border = '8px solid #d4af37';
-            if (customConfig.frame === 'wood') preview.style.border = '12px solid #78350f';
-
-            // Update Summary Text
-            const summaryEl = document.getElementById('preview-summary');
-            const funcText = customConfig.functions.length > 0 ? customConfig.functions.join(', ') : "No Smart Functions";
-            summaryEl.innerHTML = `
-                <li>${customConfig.width}cm x ${customConfig.height}cm</li>
-                <li>${document.querySelector(`[data-val="${customConfig.shape}"] span`).innerText}</li>
-                <li>${document.querySelector(`[data-val="${customConfig.frame}"] span`).innerText}</li>
-                <li>${funcText}</li>
-            `;
-        }
-
-        function addCustomConfigToCart() {
-            const funcText = customConfig.functions.length > 0 ? customConfig.functions.join(', ') : "None";
-            const item = {
-                id: 'conf-' + Date.now(),
-                name: "Custom Configuration",
-                description: `${customConfig.width}x${customConfig.height}cm, ${customConfig.shape}, ${customConfig.frame}`,
-                specs: `**Dimensions:** ${customConfig.width}cm x ${customConfig.height}cm\n**Shape:** ${customConfig.shape}\n**Frame:** ${customConfig.frame}\n**Functions:** ${funcText}`,
-                isCustom: true,
-                quantity: 1
-            };
-            cart.push(item);
-            updateCartUI();
-            showToast(getTrans('toast_added'));
-            toggleCart();
-        }
-
-        // --- GEMINI AI FEATURES (UPDATED FOR LOCALE) ---
+        // --- STAFF PORTAL LOGIC (ENHANCED) ---
         
-        function setPrompt(text) {
-            document.getElementById('ai-prompt').value = text;
-            window.scrollTo({ top: 300, behavior: 'smooth' });
+        function switchAuth(mode) {
+            // Hide all forms
+            document.getElementById('auth-form-login').classList.add('hidden');
+            document.getElementById('auth-form-register').classList.add('hidden');
+            document.getElementById('auth-form-forgot').classList.add('hidden');
+            
+            // Show selected
+            document.getElementById(`auth-form-${mode}`).classList.remove('hidden');
+            
+            // Clear inputs for security/cleanliness
+            document.querySelectorAll('#view-login input').forEach(input => input.value = '');
         }
 
-        async function generateDesign() {
-            const promptInput = document.getElementById('ai-prompt').value;
-            const btn = document.getElementById('btn-generate');
-            const outputSection = document.getElementById('ai-output-section');
-            const resultDiv = document.getElementById('ai-result-content');
+        function handleLogin() {
+            const id = document.getElementById('login-id').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+            
+            const user = staffUsers.find(u => u.id === id && u.pass === pass);
+            
+            if (user) {
+                showToast(`Welcome back, ${user.name}!`);
+                navigateTo('dashboard');
+                renderDashboard();
+            } else {
+                showToast("Invalid ID or Password");
+                // Shake animation effect
+                const container = document.querySelector('#auth-form-login');
+                container.classList.add('animate-pulse');
+                setTimeout(() => container.classList.remove('animate-pulse'), 200);
+            }
+        }
 
-            if (!promptInput.trim()) {
-                showToast("Please describe your idea first.");
+        function handleRegister() {
+            const name = document.getElementById('reg-name').value.trim();
+            const id = document.getElementById('reg-id').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const pass = document.getElementById('reg-pass').value.trim();
+
+            // Simple validation
+            if (staffUsers.find(u => u.id === id)) {
+                showToast("Employee ID already exists");
                 return;
             }
 
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
+            // Create user
+            staffUsers.push({ id, pass, name, email });
+            
+            showToast("Account created! Please login.");
+            switchAuth('login');
+            
+            // Pre-fill login for convenience
+            document.getElementById('login-id').value = id;
+        }
+
+        function handleForgot() {
+            const email = document.getElementById('forgot-email').value;
+            // Simulate API call
+            const btn = document.querySelector('#auth-form-forgot button');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Sending...";
             btn.disabled = true;
-            resultDiv.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-wand-magic-sparkles text-accent text-4xl sparkle-loader"></i><p class="mt-4 text-gray-500">Consulting AI Architect...</p></div>';
-            outputSection.classList.remove('hidden');
-            outputSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-            try {
-                // Inject Language Instruction
-                const targetLang = langMap[currentLang] || "English";
-                const systemInstruction = `You are an expert industrial designer for Lumina Mirrors. Convert the user's idea into a professional manufacturing spec. 
-                Output Markdown with headers: '### Concept Name', '### Specs', '### Features', '### Why This Works'.
-                IMPORTANT: Output the entire response in ${targetLang} language.`;
-                
-                const userQuery = `Create a mirror design specification for: "${promptInput}"`;
-
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: userQuery }] }],
-                        systemInstruction: { parts: [{ text: systemInstruction }] }
-                    })
-                });
-
-                if (!response.ok) throw new Error('AI Design Failed');
-                const data = await response.json();
-                const aiText = data.candidates[0].content.parts[0].text;
-                
-                currentGeneratedDesign = {
-                    id: 'custom-' + Date.now(),
-                    name: "Custom AI Design",
-                    description: promptInput,
-                    specs: aiText,
-                    isCustom: true,
-                    quantity: 1
-                };
-
-                resultDiv.innerHTML = marked.parse(aiText);
-
-            } catch (error) {
-                console.error(error);
-                resultDiv.innerHTML = `<div class="text-red-500 text-center">Generation failed. Try again.</div>`;
-            } finally {
-                btn.innerHTML = originalText;
+            
+            setTimeout(() => {
+                showToast(`Reset link sent to ${email}`);
+                btn.innerText = originalText;
                 btn.disabled = false;
+                switchAuth('login');
+            }, 1500);
+        }
+
+        function handleLogout() {
+            // Clear any session data if we were using localStorage
+            navigateTo('login');
+            switchAuth('login'); // Ensure we land on login form, not register
+            showToast("Logged out successfully");
+        }
+
+        function renderDashboard() {
+            const tbody = document.getElementById('dashboard-table-body');
+            tbody.innerHTML = products.map(p => `
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="p-4"><div class="h-12 w-12 rounded bg-gray-100 overflow-hidden"><img src="${p.image}" class="h-full w-full object-cover"></div></td>
+                    <td class="p-4 font-bold text-gray-900">${p.name}</td>
+                    <td class="p-4 text-sm text-gray-500 capitalize">${p.category}</td>
+                    <td class="p-4 text-sm text-gray-400">#${p.id}</td>
+                    <td class="p-4"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">Active</span></td>
+                    <td class="p-4">
+                        <button onclick="deleteProduct(${p.id})" class="text-red-500 hover:text-red-700 text-sm font-bold border border-red-200 px-3 py-1 rounded hover:bg-red-50 transition">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteProduct(id) {
+            if(confirm("Are you sure you want to delete this product?")) {
+                products = products.filter(p => p.id !== id);
+                renderDashboard();
+                renderCatalog(products); // Update public views too
+                showToast("Product deleted successfully");
             }
         }
 
-        async function analyzeRoom() {
-            if (!currentImageBase64) return;
-
-            const btn = document.getElementById('btn-analyze');
-            const outputSection = document.getElementById('ai-output-section');
-            const resultDiv = document.getElementById('ai-result-content');
-
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...`;
-            btn.disabled = true;
-            outputSection.classList.remove('hidden');
-            resultDiv.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-eye text-accent text-4xl sparkle-loader"></i><p class="mt-4 text-gray-500">Analyzing interior style...</p></div>';
-            outputSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-            try {
-                const targetLang = langMap[currentLang] || "English";
-                const prompt = `Analyze this room's interior design style, color palette, and lighting. 
-                Based on this, recommend a specific mirror design (Shape, Frame Material, Features) that would perfectly complement the space. 
-                Provide manufacturing specs. 
-                IMPORTANT: Output the response in ${targetLang} language.`;
-                
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [
-                                { text: prompt },
-                                { inlineData: { mimeType: "image/jpeg", data: currentImageBase64 } }
-                            ]
-                        }]
-                    })
-                });
-
-                if (!response.ok) throw new Error('Vision Analysis Failed');
-                const data = await response.json();
-                const aiText = data.candidates[0].content.parts[0].text;
-
-                currentGeneratedDesign = {
-                    id: 'vision-' + Date.now(),
-                    name: "AI Room Recommendation",
-                    description: "Based on uploaded room photo",
-                    specs: aiText,
-                    isCustom: true,
-                    quantity: 1
-                };
-
-                resultDiv.innerHTML = marked.parse(aiText);
-
-            } catch (error) {
-                console.error(error);
-                resultDiv.innerHTML = `<div class="text-red-500 text-center">Analysis failed. Ensure image is < 4MB JPG/PNG.</div>`;
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
+        function toggleUploadForm() {
+            const form = document.getElementById('upload-form');
+            form.classList.toggle('hidden');
         }
 
-        function addCustomToCart() {
-            if (!currentGeneratedDesign) return;
-            cart.push(currentGeneratedDesign);
-            updateCartUI();
-            showToast(getTrans('toast_added'));
-            document.getElementById('ai-output-section').classList.add('hidden');
+        async function handleProductUpload() {
+            const name = document.getElementById('prod-name').value;
+            const cat = document.getElementById('prod-cat').value;
+            const fileInput = document.getElementById('prod-img-files');
+            const desc = document.getElementById('prod-desc').value;
+            const moq = document.getElementById('prod-moq').value;
+            const details = document.getElementById('prod-details').value;
+
+            if (fileInput.files.length === 0) {
+                showToast("Please select at least one image.");
+                return;
+            }
+
+            const btn = document.querySelector('#upload-form button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Uploading...";
+            btn.disabled = true;
+
+            // Convert images to Base64
+            const images = [];
+            for (let i = 0; i < fileInput.files.length; i++) {
+                const file = fileInput.files[i];
+                const base64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(file);
+                });
+                images.push(base64);
+            }
+
+            const newProduct = {
+                id: Math.floor(Math.random() * 10000) + 200,
+                name: name,
+                category: cat,
+                image: images[0], // Main image
+                images: images, // Gallery
+                description: desc,
+                moq: moq || "Negotiable",
+                details: details || "Standard specs",
+                dimensions: "Custom",
+                quantity: 1
+            };
+
+            // Add to local array
+            products.unshift(newProduct); // Add to top
+            
+            // Refresh views
+            renderDashboard();
+            renderCatalog(products);
+            
+            // Reset form
+            toggleUploadForm();
+            document.querySelector('#upload-form form').reset();
+            btn.innerText = originalText;
+            btn.disabled = false;
+            
+            showToast("Product uploaded successfully!");
         }
 
         // Chatbot
@@ -1602,9 +1476,10 @@
                 const targetLang = langMap[currentLang] || "English";
                 const productContext = products.map(p => `${p.name} (${p.category}): ${p.description}. MOQ: ${p.moq}. Specs: ${p.details}`).join('\n');
                 
-                const systemPrompt = `You are a helpful sales assistant for Lumina Mirrors (OEM/ODM Factory). 
+                const systemPrompt = `You are a helpful sales assistant for BOLEN Mirrors (OEM/ODM Factory). 
                 Use this product data to answer questions: ${productContext}.
                 If asked about things not in the catalog, explain that we do custom manufacturing (ODM). 
+                We have a 25,000 sqm factory in Jiaxing, 100,000+ SKUs, and export to 120+ countries.
                 Keep answers short (under 50 words) and professional.
                 IMPORTANT: Reply in ${targetLang}.`;
 
@@ -1630,40 +1505,35 @@
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        // Vision Analysis Image Helper
-        let currentImageBase64 = null;
-
-        function handleImagePreview(input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('image-preview').src = e.target.result;
-                    document.getElementById('image-preview').classList.remove('hidden');
-                    document.getElementById('image-placeholder').classList.add('hidden');
-                    
-                    currentImageBase64 = e.target.result.split(',')[1];
-                    
-                    const btn = document.getElementById('btn-analyze');
-                    btn.disabled = false;
-                    btn.classList.remove('bg-gray-300', 'cursor-not-allowed');
-                    btn.classList.add('bg-accent', 'hover:bg-yellow-600');
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
         // Standard Features
         function showProductDetail(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
 
+            const images = product.images || [product.image];
+            let galleryHtml = '';
+            
+            if(images.length > 1) {
+                galleryHtml = `<div class="flex gap-2 mt-4 overflow-x-auto pb-2">
+                    ${images.map((img, idx) => `
+                        <div class="thumbnail h-20 w-20 flex-shrink-0 border border-gray-200 rounded cursor-pointer overflow-hidden ${idx === 0 ? 'active' : ''}" 
+                             onclick="changeMainImage(this, '${img}')">
+                            <img src="${img}" class="h-full w-full object-cover">
+                        </div>
+                    `).join('')}
+                </div>`;
+            }
+
             const container = document.getElementById('detail-container');
             // Localize Detail View
             container.innerHTML = `
-                <div class="h-[500px] bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-                    <img src="${product.image}" class="w-full h-full object-cover" alt="${product.name}">
+                <div>
+                    <div class="h-[500px] bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+                        <img id="main-detail-image" src="${images[0]}" class="w-full h-full object-cover" alt="${product.name}">
+                    </div>
+                    ${galleryHtml}
                 </div>
+                
                 <div>
                     <span class="text-accent font-bold tracking-wider uppercase text-sm">${getCategoryName(product.category)} Series</span>
                     <h1 class="text-4xl font-serif font-bold text-gray-900 mt-2 mb-4">${product.name}</h1>
@@ -1703,6 +1573,13 @@
             navigateTo('product-detail');
         }
 
+        function changeMainImage(thumb, src) {
+            document.getElementById('main-detail-image').src = src;
+            // Update active state
+            document.querySelectorAll('.thumbnail').forEach(el => el.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
         function renderHomePreview(items) {
             const grid = document.getElementById('home-product-grid');
             grid.innerHTML = items.map(product => createProductCard(product)).join('');
@@ -1714,10 +1591,11 @@
         }
 
         function createProductCard(product) {
+            const displayImage = product.images ? product.images[0] : product.image;
             return `
                 <div class="group fade-in cursor-pointer" onclick="showProductDetail(${product.id})">
                     <div class="relative overflow-hidden bg-gray-100 mb-4 h-80 w-full rounded-md">
-                        <img src="${product.image}" alt="${product.name}" class="h-full w-full object-cover transform group-hover:scale-105 transition duration-700">
+                        <img src="${displayImage}" alt="${product.name}" class="h-full w-full object-cover transform group-hover:scale-105 transition duration-700">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300"></div>
                         <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0">
                             <span class="bg-white text-gray-900 text-xs font-bold px-2 py-1 rounded">${getTrans('lbl_view_details')}</span>
@@ -1757,7 +1635,9 @@
             if (existingItem) {
                 existingItem.quantity++;
             } else {
-                cart.push({ ...product, quantity: 1 });
+                // Ensure image property exists for cart display logic
+                const displayImage = product.images ? product.images[0] : product.image;
+                cart.push({ ...product, image: displayImage, quantity: 1 });
             }
             updateCartUI();
             showToast(getTrans('toast_added'));
@@ -1805,9 +1685,10 @@
                             </div>
                         `;
                     } else {
+                        const displayImage = item.image || (item.images ? item.images[0] : '');
                         el.innerHTML = `
                             <div class="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img src="${item.image}" alt="${item.name}" class="h-full w-full object-cover">
+                                <img src="${displayImage}" alt="${item.name}" class="h-full w-full object-cover">
                             </div>
                             <div class="flex flex-1 flex-col justify-center">
                                 <div class="flex justify-between text-sm font-medium text-gray-900">
@@ -1842,7 +1723,7 @@
                 showToast(getTrans('cart_empty'));
                 return;
             }
-            let body = "Hello Lumina Team,\n\nI am interested in a quote for:\n\n";
+            let body = "Hello BOLEN Team,\n\nI am interested in a quote for:\n\n";
             
             cart.forEach(item => {
                 if (item.isCustom) {
@@ -1854,7 +1735,7 @@
             
             body += "\nPlease contact me with details.\n\nRegards,";
             
-            const mailtoLink = `mailto:sales@luminamirrors.com?subject=Bulk Inquiry&body=${encodeURIComponent(body)}`;
+            const mailtoLink = `mailto:sales@bolenmirror.com?subject=Bulk Inquiry&body=${encodeURIComponent(body)}`;
             
             const link = document.createElement('a');
             link.href = mailtoLink;
